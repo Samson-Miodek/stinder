@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить профиль</title>
+    <head th:insert="header :: head"></head>
+</head>
+<body>
+<header th:insert="~{header :: header}">
+</header>
+
+
+<form name="f" th:action="@{/profile/addHobby}"  method="post">
+    <div class="container">
+        <input list="brow" type="text" name="name" class="form-control" placeholder="К примеру: физика">
+        <datalist id="brow">
+            <option th:each="hobby : ${hobbies}" th:value="${hobby.getName()}">
+        </datalist>
+        <button class="mt-3 mb-3 text-center btn btn-primary profile-button" type="submit">Отправить</button>
+    </div>
+</form>
+<div class="container">
+    <div th:each="hobby : ${hobbies}">
+        <p th:text="${hobby.getName()}"></p>
+    </div>
+</div>
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

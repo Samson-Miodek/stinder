@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <head th:insert="header :: head"></head>
+    <style>
+        .form-control{
+            color: #28a745;
+            font-weight: 550;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="~{header :: header}">
+</header>
+
+<form name="f" th:action="@{updateProfile}" th:object="${user}" method="post">
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" th:src="@{/img/avatar.png}">
+                    <span th:text="${user.name}" class="font-weight-bold">Name</span>
+                    <!--                <span class="text-black-50">edogaru@mail.com.my</span><span> </span>-->
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Профиль</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Имя</label><input th:value="${user.name}" th:field="*{name}" required  type="text" class="form-control" placeholder="Имя" ></div>
+                        <div class="col-md-6"><label class="labels">Фамилия</label><input th:value="${user.surname}" th:field="*{surname}" required  type="text" class="form-control"  placeholder="Фамилия "></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Отчество</label><input th:value="${user.patronymic}" th:field="*{patronymic}" type="text" class="form-control" placeholder="Отчество"></div>
+                        <div class="col-md-12"><label class="labels">Специальность</label>
+                            <input th:value="${user.specialty}" th:field="*{specialty}" type="text" class="form-control" placeholder="По какому направлению обучаюсь либо закончил обучение" ></div>
+                        <div class="col-md-12"><label class="labels">Область научных интересов</label>
+                            <input th:value="${user.areaScientificInterests}" th:field="*{areaScientificInterests}"  type="text" class="form-control" placeholder="Физика, история, психология" ></div>
+                        <div class="col-md-12"><label class="labels">Учёное звание</label>
+                            <input th:value="${user.academicTitle}" th:field="*{academicTitle}"  type="text" class="form-control" placeholder="Доцент" ></div>
+                        <div class="col-md-12"><label class="labels">Учёная степень</label>
+                            <input th:value="${user.academicDegree}" th:field="*{academicDegree}"  type="text" class="form-control" placeholder="Кандитат технических наук" ></div>
+                        <div class="col-md-12"><label class="labels">Должность</label>
+                            <input th:value="${user.position}" th:field="*{position}"  type="text" class="form-control" placeholder="Руководитель образовательной программы..." ></div>
+
+
+                        <div class="mt-5 text-center col-md-12">
+                            <a th:href="@{/profile/addHobby}">
+                                    Добавить хобби
+                            </a>
+                        </div>
+
+                        <div class="mt-5 text-center col-md-12" th:each="hobby : ${user.getHobbies()}">
+                            <p>
+                             <span th:text="${hobby.getName()}">
+                                </span>
+                                <a th:href="@{/profile/deleteHobby/} + ${hobby.getId()}"> Удалить</a>
+                            </p>
+                        </div>
+
+
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Обновить профиль</button></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience"><h4>Настройка роли</h4></div><br>
+                    <div class="col-md-12"><label class="labels">Кто я</label>
+                        <select name="role" class="custom-select custom-select-lg mb-3" aria-label="Default select example">
+                            <option th:text="${user.role}" selected>Моя роль</option>
+                            <option th:value="'Студент'">Студент</option>
+                            <option th:value="'Студент-аспирант'">Студент-аспирант</option>
+                            <option th:value="'Научный сотрудник'">Научный сотрудник</option>
+                            <option th:value="'Научный руководитель'">Научный руководитель</option>
+                        </select>
+                    </div> <br>
+                    <div class="col-md-12"><label class="labels">Статус</label>
+                        <select name="status" class="custom-select custom-select-lg mb-3" aria-label="Default select example">
+                            <option th:text="${user.status}" selected>Статус</option>
+                            <option th:value="'Не ищу команду'">Не ищу команду</option>
+                            <option th:value="'Ищу команду'">Ищу команду</option>
+                            <option th:value="'Ищу проект'">Ищу проект</option>
+                        </select>
+                    </div> <br>
+                    <div class="col-md-12"><label class="labels">Кратко о себе</label><input th:value="${user.about}" th:field="*{about}" type="text" class="form-control" placeholder="Кратко о себе"></div>
+                    <br>
+                    <div class="mt-5 text-center">
+                        <a th:href="@{/profile/publications}">
+                            <div class="btn btn-primary profile-button" type="submit">Мои публикации</div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </form>
+
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Профиль</title>
+  <head th:insert="header :: head"></head>
+</head>
+<body>
+<header th:insert="~{header :: header}">
+</header>
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" th:src="@{/img/avatar.png}">
+          <span th:text="${user.name}" class="font-weight-bold">Name</span>
+          <!--                <span class="text-black-50">edogaru@mail.com.my</span><span> </span>-->
+        </div>
+      </div>
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Профиль</h4>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4"><label class="labels" th:text="${user.name}">Имя</label></div>
+            <div class="col-md-4"><label class="labels" th:text="${user.surname}">Фамилия</label></div>
+            <div class="col-md-4" th:if="${user.patronymic != null}">
+              <label class="labels " th:text="${user.patronymic}">Отчество </label>
+            </div>
+          </div>
+          <div class="row mt-3">
+
+            <div th:if="${user.specialty != null}" class="col-md-12">
+              <label class="labels">Специальность</label>
+              <label class="labels form-control" th:text="${user.specialty}">Специальность </label>
+            </div>
+
+            <div class="col-md-12" th:if="${user.areaScientificInterests != null}">
+              <label class="labels">Область научных интересов</label>
+              <label class="labels form-control" th:text="${user.areaScientificInterests}"> </label>
+            </div>
+
+            <div class="col-md-12" th:if="${user.academicTitle != null}">
+              <label class="labels">Учёное звание</label>
+              <label class="labels form-control" th:text="${user.academicTitle}"> </label>
+            </div>
+            <div class="col-md-12" th:if="${user.academicDegree != null}">
+              <label class="labels">Учёная степень</label>
+              <label class="labels form-control" th:text="${user.academicDegree}"> </label>
+            </div>
+            <div class="col-md-12" th:if="${user.position != null}">
+              <label class="labels">Должность</label>
+              <label class="labels form-control" th:text="${user.position}"> </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center experience"><h4>Роль</h4></div><br>
+          <div class="col-md-12"><label class="labels">Я</label>
+            <select  class="custom-select custom-select-lg mb-3" aria-label="Default select example">
+              <option th:text="${user.role}" selected>Моя роль</option>
+            </select>
+          </div> <br>
+          <div class="col-md-12" th:if="${user.about != null}"><label class="labels" th:text="${user.about}">Кратко обо мне</label></div>
+          <br>
+          <div class="mt-5 text-center">
+            <a th:href="@{/profile/}+${user.id}+'/publications'">
+              <div class="btn btn-primary profile-button" type="submit">Публикации</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

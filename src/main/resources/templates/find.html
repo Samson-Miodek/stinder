@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="header :: head"></head>
+<head>
+  <title>Stinder</title>
+  <!--    <head th:insert="fragments.html :: headerfiles"></head>-->
+  <!--    <link href="/bootstrap.min.css" rel="stylesheet">-->
+  <!--    <link href="/main.css" rel="stylesheet">-->
+</head>
+<body>
+
+<header th:insert="~{header :: header}">
+</header>
+
+<div th:insert="~{header :: findByRole}">
+</div>
+
+<div class="container ">
+
+  <h1 class="text-center" th:text="${HOBBY.name}">С интересами </h1>
+  <br>
+
+
+  <div sec:authorize="isAuthenticated()"  class="card d-inline-flex mb-5 cardwh"  th:each="user : ${userList}"     th:if="${user.id != myId}" >
+
+    <a th:href="@{/profile/} + ${user.id}">
+      <img class="card-img-top" th:src="@{/img/avatar.png}" alt="avatar">
+    </a>
+    <div class="card-body">
+      <h3 class="card-title" th:text="${user.name} + ' ' + ${user.surname}">name</h3>
+      <h4 class="card-title" th:text="${user.role}">role</h4>
+      <h5 class="card-title" th:if="${user.status != null && !user.status.equals('Не ищу команду')}" th:text="${user.status}">status</h5>
+      <h6 class="card-text" th:text="${user.about}">About</h6>
+
+      <div>
+
+
+        <a th:each="hobby : ${user.hobbies}"  th:href="@{/find/} + ${hobby.id}" >
+          <button class="card-text btn"
+
+                  th:text="${hobby.getName()}"
+                  th:classappend="${hobby.id == HOBBY.id} ? 'btn-success' :  'btn-danger'">
+
+          </button>
+        </a>
+      </div>
+
+
+      <a th:href="@{/messenger/} + ${user.id}" class="btn btn-primary">Написать</a>
+<!--      <a th:href="@{/messenger/} + ${user.id}" class="btn btn-warning">Мэтч</a>-->
+    </div>
+  </div>
+
+
+</div>
+
+<footer th:insert="~{footer :: footer}">
+</footer>
+
+
+</body>
+</html>

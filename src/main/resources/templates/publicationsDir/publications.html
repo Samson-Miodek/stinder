@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <head th:insert="header :: head"></head>
+  <meta charset="UTF-8">
+  <title>Добавить публикацию</title>
+</head>
+<body>
+<header th:insert="~{header :: header}">
+</header>
+
+  <form name="f" th:action="@{/profile/publications/add}" method="post">
+    <div class="container">
+      <h1 class="mt-3 mb-3">Мои публикации</h1>
+      <input type="text" name="name" class="form-control" placeholder="Диффузия ионов кобальта в натрийборосиликатном расплаве">
+      <input type="text" name="link" class="form-control" placeholder="https://science.urfu.ru/ru/publications/...">
+      <button class="mt-3 mb-3 text-center btn btn-primary profile-button" type="submit">Отправить</button>
+    </div>
+  </form>
+
+<div class="container">
+  <div th:each="publication : ${publications}">
+    <a th:href="${publication.getLink()}"><span th:text="${publication.getName()}"></span></a>
+    <span>  <a th:href="@{/profile/publications/delete/}+${publication.id}">Удалить</a></span>
+  </div>
+</div>
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head >
+    <title>Регистрация</title>
+    <head th:insert="header :: head"></head>
+
+</head>
+<body>
+
+<div class="container">
+    <div style="max-width:700px;margin: auto;margin-top:24px;padding: 24px;">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="card-block" style="padding: 24px;">
+                <form name="f" th:action="@{register}" th:object="${user}" method="post">
+                    <!-- Thymeleaf + Spring Security error display -->
+                    <div th:if="${param.mailError}" class="alert alert-danger">
+                        Почта уже существует, <a th:href="@{/login}">войдите</a> в аккаунт
+                    </div>
+
+                    <!-- Login Controls -->
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" name="name"
+                               placeholder="Имя">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">Фамилия</label>
+                        <input type="text" class="form-control" id="surname" th:field="*{surname}" name="surname"
+                               placeholder="Фамилия">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Почта</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" name="email"
+                               placeholder="email@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" id="password"  th:field="*{password}" name="password"
+                               placeholder="Пароль">
+                    </div>
+
+                    <!-- Login Button -->
+                    <div class="form-actions" style="margin-top: 12px;">
+                        <button type="submit" class="btn btn-success">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

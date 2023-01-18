@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: head"></head>
+<head>
+  <title>Приглашение в чат</title>
+</head>
+<body>
+<header class="mb-lg-3 " th:insert="~{header :: header}">
+</header>
+
+<div class="container bg-dark p-lg-5 mb-lg-4">
+  <div class="row text-white">
+      <h3>Введите пригласительный код</h3>
+  </div>
+</div>
+
+
+<div class="container">
+  <form name="f" th:action="@{/messenger/invite/chat}" method="post">
+    <div class="form-group">
+      <label for="code">Введите код</label>
+      <input type="text" class="form-control" id="code"  name="code">
+      <input type="hidden" class="form-control" id="chatId"  name="chatId" th:value="${chatId}">
+    </div>
+    <div class="form-actions" style="margin-top: 12px;">
+      <button type="submit" class="btn btn-success">Отправить</button>
+    </div>
+  </form>
+</div>
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

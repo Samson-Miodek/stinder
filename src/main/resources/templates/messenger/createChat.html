@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: head"></head>
+<head>
+  <title>Беседы</title>
+</head>
+<body>
+<header class="mb-lg-3 " th:insert="~{header :: header}">
+</header>
+
+<div th:insert="~{header :: messengerHead}" ></div>
+
+
+<div class="container">
+  <form method="post" th:action="@{/messenger/createChat}">
+    <fieldset>
+      <div class="form-group">
+        <label for="name">Название чата</label>
+        <input type="text" class="form-control" id="name" name="name"
+               placeholder="Название чата">
+      </div>
+
+      <div class="form-actions" style="margin-top: 12px;">
+        <button type="submit" class="btn btn-success">Создать</button>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
+
+
+<!--    <div th:each="chat : ${chats}">-->
+<!--        <a th:href="@{/messenger/chat/(f=${chat.getId()})}" >-->
+<!--            <div class="row mb-lg-3 -underline">-->
+<!--                <div class="col-lg-2" th:text="${chat.getId()}" >-->
+
+<!--                </div>-->
+<!--                <div class="col-lg-6" th:text="${chat.getLastMessage() != null} ? ${chat.getLastMessage().getText() } : 'msg'  ">-->
+<!--                    Привет! Тебе пришло сообщение-->
+<!--                </div>-->
+<!--&lt;!&ndash;                <div class="col-lg-2" th:text="${chat.getMessages() != null} ? ${chat.getMessages().size()} : 0">&ndash;&gt;-->
+<!--&lt;!&ndash;                    колво&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--        </a>-->
+<!--    </div>-->
+
+
+
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="header :: head"></head>
+<head>
+  <title>Админ</title>
+</head>
+<body>
+
+<header th:insert="~{header :: header}">
+</header>
+
+<div class="container">
+
+  <div th:each="user : ${users}">
+    <span th:text="${user.id} "></span>
+    <span th:text="${user.name} "></span>
+    <span th:text="${user.surname}"></span>
+    <a th:if="${!user.isModerator()}" th:href="@{/admin/addModerator/}+${user.id}">Дать роль модератора</a>
+    <a th:if="${user.isModerator()}" th:href="@{/admin/removeModerator/}+${user.id}">Забрать роль модератора</a>
+
+  </div>
+
+</div>
+
+
+
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>

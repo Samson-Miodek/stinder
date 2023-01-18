@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <head th:insert="header :: head"></head>
+  <meta charset="UTF-8">
+  <title>Добавить публикацию</title>
+</head>
+<body>
+<header th:insert="~{header :: header}">
+</header>
+
+<div class="container">
+  <div th:each="publication : ${publications}">
+    <a th:href="${publication.getLink()}"><p th:text="${publication.getName()}"></p></a>
+  </div>
+</div>
+<footer th:insert="~{footer :: footer}">
+</footer>
+</body>
+</html>
