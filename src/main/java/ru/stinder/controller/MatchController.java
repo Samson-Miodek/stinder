@@ -30,7 +30,8 @@ public class MatchController {
     @Autowired
     private StataRepository stataRepository;
 
-    private static Stata lastStata = new Stata("1.1.1.1",new Timestamp(new Date().getTime()));
+    private static Stata lastStata = new Stata("1.1.1.1", new Timestamp(new Date().getTime()));
+
     //    Вывод всех пользователей и их хобби
     @GetMapping()
     public String index(Principal principal, Model model, HttpServletRequest request) {
@@ -43,11 +44,11 @@ public class MatchController {
             model.addAttribute("myHobbis", hobbies);
         }
 
-        Stata stata = new Stata(request.getRemoteAddr(),new Timestamp(new Date().getTime()));
-        long deltaTime = stata.getDate().getTime()-lastStata.getDate().getTime();
+        Stata stata = new Stata(request.getRemoteAddr(), new Timestamp(new Date().getTime()));
+        long deltaTime = stata.getDate().getTime() - lastStata.getDate().getTime();
         long sec = TimeUnit.MILLISECONDS.toSeconds(deltaTime);
 
-        if(sec > 10){
+        if (sec > 10) {
             lastStata = stata;
             stataRepository.save(stata);
         }
@@ -96,15 +97,10 @@ public class MatchController {
         }
 
         model.addAttribute("userList", userList);
+        model.addAttribute("myHobbisDel", hobbies);
+        model.addAttribute("myHobbis", hobbies);
+        model.addAttribute("myId", user.getId());
 
-        if (true) {
-            model.addAttribute("myHobbisDel", hobbies);
-            model.addAttribute("myHobbis", hobbies);
-            model.addAttribute("myId", user.getId());
-
-        } else {
-            return "redirect:/";
-        }
 
         return "match";
     }
