@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  postgres-stinder:
+    image: 'postgres:10'
+    container_name: 'java-postgres-stinder'
+    environment:
+      - 'POSTGRES_USER=den'
+      - 'POSTGRES_PASSWORD=123'
+      - 'POSTGRES_DB=demo_db'
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  app-stinder:
+    build: ./
+    container_name: 'java-app-stinder'
+    ports:
+      - 80:8080

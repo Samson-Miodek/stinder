@@ -17,8 +17,11 @@
             <div class="card-block" style="padding: 24px;">
                 <form name="f" th:action="@{register}" th:object="${user}" method="post">
                     <!-- Thymeleaf + Spring Security error display -->
-                    <div th:if="${param.mailError}" class="alert alert-danger">
-                        Почта уже существует, <a th:href="@{/login}">войдите</a> в аккаунт
+                    <div th:if="${param.userAlreadyExists}" class="alert alert-danger">
+                        Пользователь уже существует, <a th:href="@{/login}">войдите</a> в аккаунт
+                    </div>
+                    <div th:if="${param.emptyField}" class="alert alert-danger">
+                        Поля не должны быть пустыми
                     </div>
 
                     <!-- Login Controls -->
